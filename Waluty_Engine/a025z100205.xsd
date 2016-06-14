@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="tabela_kursow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="numer_tabeli" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+        <xs:element name="data_publikacji" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+        <xs:element name="pozycja" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nazwa_waluty" type="xs:string" minOccurs="0" />
+              <xs:element name="przelicznik" type="xs:string" minOccurs="0" />
+              <xs:element name="kod_waluty" type="xs:string" minOccurs="0" />
+              <xs:element name="kurs_sredni" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="typ" type="xs:string" />
+      <xs:attribute name="uid" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="tabela_kursow" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

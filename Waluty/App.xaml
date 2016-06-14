@@ -1,0 +1,12 @@
+﻿<Application x:Class="Waluty.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:engine="clr-namespace:Waluty.Engine;assembly=Waluty.Engine" mc:Ignorable="d">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <engine:AppBootstrapper x:Key="Bootstrapper" />
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Waluty.ViewModel" />
+        </ResourceDictionary>
+	  </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>
