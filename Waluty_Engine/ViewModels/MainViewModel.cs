@@ -329,7 +329,7 @@ namespace Waluty.Engine.ViewModels
                     IList<string> dirs = GetDir(RokKoniec);
                     if (dirs != null && dirs.Count > 0)
                     {
-                        String fd = GetDir(dirs, false, RokKoniec, "yy1231");
+                        String fd = GetDir(dirs, false, RokKoniec, "yyMMdd"); //yy1231
                         String data = GetExchangeRate(fd);
 
                         XmlSerializer x = new XmlSerializer(typeof(tabela_kursow));
