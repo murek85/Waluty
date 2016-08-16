@@ -1,20 +1,24 @@
 ﻿<mah:MetroWindow x:Class="Waluty.Views.MainView"
-                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-					  xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-					  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-					  xmlns:beh="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-					  Icon="pack://application:,,,/Waluty;component/Resources/1457388978_Coin.png"
-					  Title="Waluty"
-                      Height="520"
-                      Width="400"
-					  MinHeight="520"
-					  MinWidth="400"
-					  IsMaxRestoreButtonEnabled="False"
-                      WindowStartupLocation="CenterScreen"
-					  WindowState="Normal"
-					  GlowBrush="{DynamicResource AccentColorBrush}">
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:beh="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+                 xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                 Title="Waluty"
+                 Width="400"
+                 Height="520"
+                 MinWidth="400"
+                 MinHeight="520"
+                 Background="{DynamicResource MaterialDesignPaper}"
+                 FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+                 GlowBrush="{DynamicResource AccentColorBrush}"
+                 Icon="pack://application:,,,/Waluty;component/Resources/1457388978_Coin.png"
+                 IsMaxRestoreButtonEnabled="False"
+                 TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                 WindowStartupLocation="CenterScreen"
+                 WindowState="Normal">
     <DockPanel>
         <Rectangle Width="10"
                    Height="60"
@@ -24,15 +28,14 @@
                    Stroke="Black"
                    StrokeThickness="0">
             <Rectangle.Fill>
-                <SolidColorBrush Color="{DynamicResource AccentColor}" />
+                <SolidColorBrush Color="{DynamicResource Primary700}" />
             </Rectangle.Fill>
         </Rectangle>
 
-        <StatusBar Height="23" 
-				   Margin="-10,0,0,0"
+        <StatusBar Height="23"
+                   Margin="-10,0,0,0"
                    DockPanel.Dock="Bottom"
-                   Padding="-10,0,0,0">
-		</StatusBar>
+                   Padding="-10,0,0,0" />
 
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
@@ -48,12 +51,25 @@
             <DockPanel Margin="10">
                 <StackPanel Margin="5" DockPanel.Dock="Top">
                     <TextBlock Padding="0,1" Text="Data faktury" />
-                    <DatePicker x:Name="dpDataFaktury" cal:Message.Attach="[Event SelectedDateChanged] = [Action SelectedDateChangedDataFaktury(dpDataFaktury.Text)]" SelectedDate="{Binding DataFaktury, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <DatePicker x:Name="dpDataFaktury"
+                                cal:Message.Attach="[Event SelectedDateChanged] = [Action SelectedDateChangedDataFaktury(dpDataFaktury.Text)]"
+                                materialDesign:HintAssist.Hint="Wybierz datę"
+                                Language="pl-PL"
+                                SelectedDate="{Binding DataFaktury,
+                                                       Mode=TwoWay,
+                                                       UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
-                <StackPanel Grid.Row="1" Margin="5" DockPanel.Dock="Top">
+                <StackPanel Margin="5" DockPanel.Dock="Top">
                     <TextBlock Padding="0,1" Text="Data kursu" />
-                    <DatePicker x:Name="dpDataKursu" cal:Message.Attach="[Event SelectedDateChanged] = [Action SelectedDateChangedDataKursu(dpDataKursu.Text)]" IsEnabled="False" SelectedDate="{Binding DataKursu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <DatePicker x:Name="dpDataKursu"
+                                cal:Message.Attach="[Event SelectedDateChanged] = [Action SelectedDateChangedDataKursu(dpDataKursu.Text)]"
+                                materialDesign:HintAssist.Hint="Wybierz datę"
+                                IsEnabled="False"
+                                Language="pl-PL"
+                                SelectedDate="{Binding DataKursu,
+                                                       Mode=TwoWay,
+                                                       UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <Grid Grid.Row="2" DockPanel.Dock="Top">
@@ -73,70 +89,110 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <StackPanel Margin="5">
+                    <StackPanel Grid.ColumnSpan="2" Margin="5">
                         <TextBlock Padding="0,1" Text="Waluta" />
-                        <ComboBox x:Name="cbListaWalut" Height="25" DisplayMemberPath="Nazwa" SelectedValuePath="Kod" ItemsSource="{Binding ListaWalut,
-			                                Mode=TwoWay,
-			                                UpdateSourceTrigger=PropertyChanged}" cal:Message.Attach="[Event SelectionChanged] = [Action SelectionChangedWaluta(cbListaWalut.SelectedItem)]"
-											SelectedValue="{Binding ListaWalutValue,
-			                                 Mode=TwoWay,
-			                                 UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Wybierz walutę" />
+                        <ComboBox x:Name="cbListaWalut"
+                                  Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SelectionChangedWaluta(cbListaWalut.SelectedItem)]"
+                                  mah:TextBoxHelper.Watermark="Wybierz walutę"
+                                  materialDesign:HintAssist.Hint="Wyszukaj walutę"
+                                  DisplayMemberPath="Nazwa"
+                                  IsEditable="True"
+                                  ItemsSource="{Binding ListaWalut,
+                                                        Mode=TwoWay,
+                                                        UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValue="{Binding ListaWalutValue,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValuePath="Kod" />
                     </StackPanel>
-                    
-					<StackPanel Margin="5" Grid.Row="1" >
+
+                    <StackPanel Grid.Row="1" Margin="5">
                         <TextBlock Padding="0,1" Text="Średni kurs" />
-                        <TextBox Height="25" Text="{Binding KursSredni,
-			                                Mode=TwoWay,
-			                                UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                        <TextBox Height="25"
+                                 IsReadOnly="True"
+                                 Text="{Binding KursSredni,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
-                    <StackPanel Margin="5" Grid.Row="2">
-                        <TextBox Height="25" Text="{Binding Kwota,
-			                                Mode=TwoWay,
-			                                UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-											mah:TextBoxHelper.Watermark="Wprowadź kwotę" />
+                    <StackPanel Grid.Row="2" Margin="5">
+                        <TextBox Height="25"
+                                 mah:TextBoxHelper.Watermark="Wprowadź kwotę"
+                                 Text="{Binding Kwota,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged,
+                                                ValidatesOnDataErrors=True}" />
                     </StackPanel>
-                    <StackPanel Margin="5" Grid.Row="2" Grid.Column="1">
-                        <TextBox Height="25" Text="{Binding KwotaPrzelicz,
-			                                Mode=TwoWay,
-			                                UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                    <StackPanel Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="5">
+                        <TextBox Height="25"
+                                 IsReadOnly="True"
+                                 Text="{Binding KwotaPrzelicz,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
-                    <StackPanel Margin="5" Grid.Row="4">
+                    <StackPanel Grid.Row="4" Margin="5">
                         <TextBlock Padding="0,1" Text="Stan na dzień 31 grudzień" />
-                        <TextBox Height="25" Text="{Binding KursSredniKoniec,
-			                                Mode=TwoWay,
-			                                UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                        <TextBox Height="25"
+                                 IsReadOnly="True"
+                                 Text="{Binding KursSredniKoniec,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
-                    <StackPanel VerticalAlignment="Bottom" Margin="5" Grid.Row="4" Grid.Column="1">
-                        <DatePicker x:Name="dpRokKoniec" cal:Message.Attach="[Event SelectedDateChanged] = [Action SelectedDateChangedRokKoniec(dpRokKoniec.Text)]" SelectedDate="{Binding RokKoniec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-					</StackPanel>
-
-                    <StackPanel VerticalAlignment="Bottom" Margin="5" Grid.Row="5" Grid.Column="1">
-                        <TextBox Height="25" Text="{Binding KwotaPrzeliczKoniec,
-			                                Mode=TwoWay,
-			                                UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                    <StackPanel Grid.Row="4"
+                                Grid.Column="1"
+                                Margin="5"
+                                VerticalAlignment="Bottom">
+                        <DatePicker x:Name="dpRokKoniec"
+                                    cal:Message.Attach="[Event SelectedDateChanged] = [Action SelectedDateChangedRokKoniec(dpRokKoniec.Text)]"
+                                    materialDesign:HintAssist.Hint="Wybierz datę"
+                                    Language="pl-PL"
+                                    SelectedDate="{Binding RokKoniec,
+                                                           Mode=TwoWay,
+                                                           UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
-                    <StackPanel Margin="7" Grid.Row="6" Grid.Column="1">
+                    <StackPanel Grid.Row="5"
+                                Grid.Column="1"
+                                Margin="5"
+                                VerticalAlignment="Bottom">
+                        <TextBox Height="25"
+                                 IsReadOnly="True"
+                                 Text="{Binding KwotaPrzeliczKoniec,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6"
+                                Grid.Column="1"
+                                Margin="7">
                         <TextBlock Padding="0,1" Text="Różnica na koniec" />
-                        <TextBox Height="25" Text="{Binding KwotaRoznica,
-			                                Mode=TwoWay,
-			                                UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                        <TextBox Height="25"
+                                 IsReadOnly="True"
+                                 Text="{Binding KwotaRoznica,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
-                    <Button Grid.Row="8" Grid.ColumnSpan="2" Width="100" IsDefault="True" Command="{Binding CmdOperOblicz}">
+                    <Button Grid.Row="8"
+                            Grid.ColumnSpan="2"
+                            Width="100"
+                            Command="{Binding CmdOperOblicz}"
+                            IsDefault="True">
                         <DockPanel>
                             <Image Width="16"
-								   Height="16"
-								   HorizontalAlignment="Center"
-								   Source="pack://application:,,,/Waluty;component/Resources/1457388990_dollar-exchange.png" />
+                                   Height="16"
+                                   HorizontalAlignment="Center"
+                                   Source="pack://application:,,,/Waluty;component/Resources/1457388990_dollar-exchange.png" />
                             <TextBlock Padding="5,0" Text="Oblicz" />
-						</DockPanel>
-					</Button>
+                        </DockPanel>
+                    </Button>
                 </Grid>
             </DockPanel>
-			
+
         </Grid>
     </DockPanel>
 </mah:MetroWindow>
